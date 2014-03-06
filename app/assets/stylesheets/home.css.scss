@@ -1,0 +1,88 @@
+// Place all the styles related to the Home controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+#container {
+  width: 1400px;
+  height: 900px;
+  // .ship_5= button_tag "", class: "ship size-5", 'data-state' => 'inactive'
+  #ships {
+    .size_5 {
+      width: 270px;
+    }
+    .size_4 {
+      width: 215px;
+    }
+    .size_3 {
+      width: 165px;
+    }
+    .size_3 {
+      width: 165px;
+    }
+    .size_2 {
+      width: 115px;
+    }
+    .ship {
+      .hover {
+        background: red;
+      }
+    }
+    button {
+      width: 50px;
+      height: 50px;
+      margin: 0;
+      padding: 0;
+      border: 0;
+      border-right: 1px solid black;
+
+      &.with_margin {
+        margin-left: -4px;
+      }
+    }
+  }
+  #left, #right {
+    width: 700px;
+    height: 800px;
+
+    .playboard {
+      width: 500px;
+      height: 500px;
+      overflow: hidden;
+      background: #ccc;
+      border: 1px solid #000;
+
+      .row {
+        margin-bottom: -4px;
+        button {
+          width: 50px;
+          height: 50px;
+          margin: 0;
+          padding: 0;
+          border: 0;
+          float: left;
+          &:hover {
+            background: red;
+          }
+          &.hit {
+            background: #000;
+          }
+          &.empty {
+            background: #fff;
+          }
+          &.selected {
+            background: #ddd;
+          }
+        }
+      }
+    }
+  }
+
+  #left {
+    float: left;
+  }
+
+  #right {
+    float: right;
+  }
+
+}

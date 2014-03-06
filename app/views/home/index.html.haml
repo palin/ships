@@ -1,0 +1,36 @@
+%h1 Ships
+
+#container
+  #dashboard
+    %p Click a ship to select
+    #ships
+      .ship.size_5{'data-state' => 'inactive', 'data-size' => 5}
+        - 5.times.each_with_index do |element, index|
+          = button_tag "", class: (index != 0 ? 'with_margin' : ''), "data-id" => 5
+      .ship.size_4{'data-state' => 'inactive', 'data-size' => 4}
+        - 4.times.each_with_index do |element, index|
+          = button_tag "", class: (index != 0 ? 'with_margin' : ''), "data-id" => 4
+      .ship.size_3{'data-state' => 'inactive', 'data-size' => 3}
+        - 3.times.each_with_index do |element, index|
+          = button_tag "", class: (index != 0 ? 'with_margin' : ''), "data-id" => 3_1
+      .ship.size_3{'data-state' => 'inactive', 'data-size' => 3}
+        - 3.times.each_with_index do |element, index|
+          = button_tag "", class: (index != 0 ? 'with_margin' : ''), "data-id" => 3_2
+      .ship.size_2{'data-state' => 'inactive', 'data-size' => 2}
+        - 2.times.each_with_index do |element, index|
+          = button_tag "", class: (index != 0 ? 'with_margin' : ''), "data-id" => 2
+
+  #left
+    %p Player 1
+    #player.playboard
+      - 10.times.each_with_index do |row, row_index|
+        .row
+          - 10.times.each_with_index do |col, col_index|
+            = button_tag "", class: "player-field", 'data-row' => row_index, 'data-column' => col_index
+  #right
+    %p Cpu
+    #cpu.playboard
+      - 10.times.each_with_index do |row, row_index|
+        .row
+          - 10.times.each_with_index do |col, col_index|
+            = button_tag "", class: "cpu-field", 'data-row' => row_index, 'data-column' => col_index
