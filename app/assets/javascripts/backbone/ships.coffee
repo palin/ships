@@ -1,8 +1,13 @@
-window.Ships =
+window.SH =
   Views:
     Playboards: {}
+  State:
+    currentSelectedShipId: null
+    shipSelected: false
+    shipsIdsOnMap: []
+    allShipsOnMap: false
 
 $ ->
-  Ships.ships = new Ships.Views.Ships
-  Ships.cpu_playboard = new Ships.Views.Playboards.Cpu
-  Ships.player_playboards = new Ships.Views.Playboards.Player
+  SH.ships = new SH.Views.Ships
+  SH.cpu_playboard = new SH.Views.Playboards.Cpu
+  SH.player_playboards = new SH.Views.Playboards.Player

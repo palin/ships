@@ -1,21 +1,34 @@
-class Ships.Views.Ships extends Marionette.ItemView
+class SH.Views.Ships extends Marionette.ItemView
 
   el: "#ships"
 
   events:
     'click .ship': 'selectShip'
-    'mouseover button': 'hoverShip'
-    'mouseout button': 'outShip'
+    'mouseover button': 'mouseOverShip'
+    'mouseout button': 'mouseOutShip'
 
-  selectShip: (e)->
+  selectShip: (e)=>
     e.preventDefault()
-    button = $(e.currentTarget)
-    button.data("state", "active")
+    ship = $(e.currentTarget)
+    if ship.data("state") == "inactive" && SH.State.shipSelected == false
+      ship.data("state", "active")
+      ship.find("button").removeClass('hover').addClass('selected')
+      SH.State.shipSelected = true
+      SH.State.currentSelectedShipId = ship.data("id")
+      $('.instructions').text("Set ship on the CPU map or click the ship to deselect")
+    else if ship.data("state") == "active"
+      ship.data("state", "inactive")
+      size = ship.data("id")
+      ship.find("button").removeClass('selected')
+      SH.State.shipSelected = false
+      SH.State.currentSelectedShipId = null
+      $('.instructions').text("Click a ship to select")
 
-  hoverShip: (e)->
-    size = $(e.currentTarget).data("id")
-    $("button[data-id='#{size}'").addClass('hover')
+  mouseOverShip: (e)->
+    return false if SH.State.shipSelected == true
+    ship = $(e.currentTarget).parent()
+    ship.find("button").addClass('hover')
 
-  outShip: (e)->
-    size = $(e.currentTarget).data("id")
-    $("button[data-id='#{size}'").removeClass('hover')
+  mouseOutShip: (e)->
+    ship = $(e.currentTarget).parent()
+    ship.find("button").removeClass('hover')

@@ -2,23 +2,23 @@
 
 #container
   #dashboard
-    %p Click a ship to select
+    %p.instructions Click a ship to select
     #ships
-      .ship.size_5{'data-state' => 'inactive', 'data-size' => 5}
+      .ship.size_5{'data-state' => 'inactive', 'data-size' => 5, 'data-id' => 5}
         - 5.times.each_with_index do |element, index|
-          = button_tag "", class: (index != 0 ? 'with_margin' : ''), "data-id" => 5
-      .ship.size_4{'data-state' => 'inactive', 'data-size' => 4}
+          = button_tag "", class: (index != 0 ? 'with_margin' : '')
+      .ship.size_4{'data-state' => 'inactive', 'data-size' => 4, 'data-id' => 4}
         - 4.times.each_with_index do |element, index|
-          = button_tag "", class: (index != 0 ? 'with_margin' : ''), "data-id" => 4
-      .ship.size_3{'data-state' => 'inactive', 'data-size' => 3}
+          = button_tag "", class: (index != 0 ? 'with_margin' : '')
+      .ship.size_3{'data-state' => 'inactive', 'data-size' => 3, 'data-id' => 3}
         - 3.times.each_with_index do |element, index|
-          = button_tag "", class: (index != 0 ? 'with_margin' : ''), "data-id" => 3_1
-      .ship.size_3{'data-state' => 'inactive', 'data-size' => 3}
+          = button_tag "", class: (index != 0 ? 'with_margin' : '')
+      .ship.size_3{'data-state' => 'inactive', 'data-size' => 3, 'data-id' => 2}
         - 3.times.each_with_index do |element, index|
-          = button_tag "", class: (index != 0 ? 'with_margin' : ''), "data-id" => 3_2
-      .ship.size_2{'data-state' => 'inactive', 'data-size' => 2}
+          = button_tag "", class: (index != 0 ? 'with_margin' : '')
+      .ship.size_2{'data-state' => 'inactive', 'data-size' => 2, 'data-id' => 1}
         - 2.times.each_with_index do |element, index|
-          = button_tag "", class: (index != 0 ? 'with_margin' : ''), "data-id" => 2
+          = button_tag "", class: (index != 0 ? 'with_margin' : '')
 
   #left
     %p Player 1
