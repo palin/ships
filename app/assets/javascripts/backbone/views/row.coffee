@@ -5,9 +5,11 @@ class SH.Views.Row extends Marionette.ItemView
   initialize: (options)->
     @rowIndex = options.rowIndex
     @rowFor = options.rowFor
+    @fields = []
 
   render: ->
     _.each [0..9], (ci)=>
       field = new SH.Views.Field(className: "#{@rowFor}-field", dataRow: @rowIndex, dataColumn: ci)
-      f = field.render()
-      @$el.append(f.$el)
+      field.render()
+      @$el.append(field.$el)
+      @fields.push field
