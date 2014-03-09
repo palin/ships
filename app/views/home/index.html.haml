@@ -21,16 +21,4 @@
           = button_tag "", class: (index != 0 ? 'with_margin' : '')
 
   #left
-    %p Player 1
-    #player.playboard
-      - 10.times.each_with_index do |row, row_index|
-        .row
-          - 10.times.each_with_index do |col, col_index|
-            = button_tag "", class: "player-field", 'data-row' => row_index, 'data-column' => col_index
   #right
-    %p Cpu
-    #cpu.playboard
-      - 10.times.each_with_index do |row, row_index|
-        .row
-          - 10.times.each_with_index do |col, col_index|
-            = button_tag "", class: "cpu-field", 'data-row' => row_index, 'data-column' => col_index

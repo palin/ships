@@ -1,4 +1,3 @@
-class SH.Views.Playboards.Player extends Marionette.ItemView
-
-  initialize: ->
-    console.log "Player Playboard ready"
+class SH.Views.Playboards.Player extends SH.Views.Playboard
+  id: 'player'
+  playboardFor: 'player'

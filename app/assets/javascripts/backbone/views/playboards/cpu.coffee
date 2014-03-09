@@ -1,6 +1,6 @@
-class SH.Views.Playboards.Cpu extends Marionette.ItemView
-
-  el: "#cpu.playboard"
+class SH.Views.Playboards.Cpu extends SH.Views.Playboard
+  id: 'cpu'
+  playboardFor: 'cpu'
   events:
     'click button': 'shoot'
     'mouseover button': 'mouseOverButton'
@@ -17,14 +17,15 @@ class SH.Views.Playboards.Cpu extends Marionette.ItemView
       $(e.currentTarget).addClass("empty")
 
   mouseOverButton: (e)->
+    ship = $(e.currentTarget).parent()
     currentRow = $(e.currentTarget).data("row")
     currentColumn = $(e.currentTarget).data("column")
     if SH.State.shipSelected == true
-      @showShipShape(currentRow, currentColumn)
+      @showShipShape(ship, currentRow, currentColumn)
     else
-      @drawGridLines(currentRow, currentColumn)
+      @drawGridLines(ship, currentRow, currentColumn)
 
-  drawGridLines: (e)->
+  drawGridLines: (ship, row, column)->
     rows_to_select = [0..row-1]
     columns_to_select = [0..column-1]
     _.each @$("button"), (button)->
@@ -35,4 +36,13 @@ class SH.Views.Playboards.Cpu extends Marionette.ItemView
       else
         $(button).removeClass("selected")
 
-  showShipShape: (e)->
+  cleanPlayboard: ->
+    @$('button').removeClass("selected")
+
+  showShipShape: (ship, row, column)->
+    console.log ship
+    shipLength = ship.data("size")
+    console.log shipLength
+    true
+
+  drawShip: (e)->
