@@ -35,8 +35,6 @@
       height: 50px;
       margin: 0;
       padding: 0;
-      border: 0;
-      border-right: 1px solid black;
 
       &.with_margin {
         margin-left: -4px;
@@ -56,26 +54,37 @@
 
       .row {
         margin-bottom: -4px;
+        margin-left: 0;
         button {
           width: 50px;
           height: 50px;
           margin: 0;
           padding: 0;
-          border: 0;
           float: left;
           &:hover {
-            background: red;
+            background: transparent;
           }
           &.hit {
             background: #000;
           }
           &.empty {
-            background: #fff;
           }
           &.selected {
             background: #ddd;
           }
+          &.placing_ship {
+            background: blue;
+          }
+          &.unavailable {
+            background: navy;
+          }
+          &.with_ship {
+            background: #000;
+          }
         }
+      }
+      &.highlighted {
+        border: 3px solid blue;
       }
     }
   }

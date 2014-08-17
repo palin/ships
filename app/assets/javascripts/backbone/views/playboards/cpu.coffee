@@ -2,26 +2,14 @@ class SH.Views.Playboards.Cpu extends SH.Views.Playboard
   id: 'cpu'
   playboardFor: 'cpu'
   events:
-    'click button': 'shoot'
     'mouseover button': 'mouseOverButton'
 
-  hit: ->
-    false
-
-  shoot: (e)->
-    row = $(e.currentTarget).data("row")
-    column = $(e.currentTarget).data("column")
-    if @hit()
-      $(e.currentTarget).addClass("hit")
-    else
-      $(e.currentTarget).addClass("empty")
-
   mouseOverButton: (e)->
-    ship = $(e.currentTarget).parent()
+    ship = SH.State.SelectedShip.ship
     currentRow = $(e.currentTarget).data("row")
     currentColumn = $(e.currentTarget).data("column")
     if SH.State.shipSelected == true
-      @showShipShape(ship, currentRow, currentColumn)
+      @drawShipShape(ship, currentRow, currentColumn)
     else
       @drawGridLines(ship, currentRow, currentColumn)
 
@@ -39,10 +27,40 @@ class SH.Views.Playboards.Cpu extends SH.Views.Playboard
   cleanPlayboard: ->
     @$('button').removeClass("selected")
 
-  showShipShape: (ship, row, column)->
-    console.log ship
+  drawShipShape: (ship, row, column)->
     shipLength = ship.data("size")
-    console.log shipLength
+    shipDirection = "horizontal"
+    if shipDirection == "horizontal"
+      rows_to_select = [row]
+      columns_to_select = [column..column+shipLength-1]
+    else if shipDirection == "vertical"
+      rows_to_select = [row..row+shipLength-1]
+      columns_to_select = [column]
+
+    console.log rows_to_select
+    console.log columns_to_select
+
+    _.each @rows, (rows_row)=>
+      if _.include(rows_to_select, rows_row.rowIndex)
+        _.each rows_row.fields, (field)=>
+          if _.include(columns_to_select, field.dataColumn)
+            if @canPlaceShip(row, column, shipLength, shipDirection, field)
+              field.$el.addClass('placing_ship')
+            else
+              field.$el.addClass('unavailable')
+          else
+            field.$el.removeClass('placing_ship')
+            field.$el.removeClass('unavailable')
+      else
+        _.each rows_row.fields, (field)->
+          field.$el.removeClass('placing_ship')
+          field.$el.removeClass('unavailable')
     true
 
-  drawShip: (e)->
+  canPlaceShip: (row, column, length, direction, field)->
+    return false if field.hasClass("unavailable") || field.hasClass("with_ship")
+
+  installShip: (e)->
+    field = SH.State.clickedField
+    ship = SH.State.SelectedShip.ship
+    # if @canPlaceShip(field.dataRow, field.dataColumn, ship.length, ship.setup, field)

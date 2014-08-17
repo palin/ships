@@ -4,10 +4,13 @@ window.SH =
     Playboards: {}
 
   State:
-    currentSelectedShipId: null
+    SelectedShip:
+      id: null
+      ship: null
     shipSelected: false
     shipsIdsOnMap: []
     allShipsOnMap: false
+    clickedField: null
 
   attachPlayboards: ->
     SH.cpu_playboard = new SH.Views.Playboards.Cpu

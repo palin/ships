@@ -9,24 +9,32 @@ class SH.Views.Ships extends Marionette.ItemView
     e.preventDefault()
     ship = $(e.currentTarget)
     if ship.data("state") == "inactive" && SH.State.shipSelected == false
+      SH.cpu_playboard.highlight()
+      SH.State.SelectedShip.ship = ship
       @activateShip(ship)
     else if ship.data("state") == "active"
       @deactivateShip(ship)
+      SH.cpu_playboard.clearHighlight()
+      SH.State.SelectedShip.ship = null
 
   mouseOverShip: (e)->
     return false if SH.State.shipSelected == true
     ship = $(e.currentTarget).parent()
-    ship.find("button").addClass('hover')
+    buttons = ship.find("button")
+    buttons.removeClass('btn-default')
+    buttons.addClass('btn-success')
 
   mouseOutShip: (e)->
     ship = $(e.currentTarget).parent()
-    ship.find("button").removeClass('hover')
+    buttons = ship.find("button")
+    buttons.removeClass('btn-success')
+    buttons.addClass('btn-default')
 
   activateShip: (ship)->
     ship.data("state", "active")
     ship.find("button").removeClass('hover').addClass('selected')
     SH.State.shipSelected = true
-    SH.State.currentSelectedShipId = ship.data("id")
+    SH.State.SelectedShip.id = ship.data("id")
     SH.cpu_playboard.cleanPlayboard()
     $('.instructions').text("Set ship on the CPU map or click the ship to deselect")
 
