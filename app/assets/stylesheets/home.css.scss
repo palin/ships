@@ -49,11 +49,10 @@
 
     .playboard {
       margin: 0 auto;
-      width: 500px;
-      height: 500px;
+      width: 506px;
+      height: 506px;
       overflow: hidden;
-      background: #ccc;
-      border: 1px solid #000;
+      border: 3px solid #599db2;
 
       .row {
         margin-bottom: -4px;
@@ -63,9 +62,11 @@
           height: 50px;
           margin: 0;
           padding: 0;
+          border-color: #7ec6dc;
+          border-radius: 0px;
           float: left;
           &:hover {
-            background: transparent;
+            background: #ddd;
           }
           &.hit {
             background: #000;
