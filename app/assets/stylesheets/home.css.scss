@@ -3,6 +3,7 @@
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
 #container {
+  margin: 0 auto;
   width: 1400px;
   height: 900px;
   // .ship_5= button_tag "", class: "ship size-5", 'data-state' => 'inactive'
@@ -23,6 +24,7 @@
       width: 115px;
     }
     .ship {
+      display: inline-block;
       .hover {
         background: red;
       }
@@ -46,6 +48,7 @@
     height: 800px;
 
     .playboard {
+      margin: 0 auto;
       width: 500px;
       height: 500px;
       overflow: hidden;
@@ -97,4 +100,9 @@
     float: right;
   }
 
+  #dashboard {
+    padding-bottom: 25px;
+    margin-bottom: 25px;
+    border-bottom: 1px dashed black;
+  }
 }
