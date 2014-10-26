@@ -10,14 +10,17 @@ class SH.Views.Playboard extends Marionette.CollectionView
     @rows = []
 
   onShow: ->
-    _.each [0..9], (ri)=>
-      row = new SH.Views.Row(rowFor: @playboardFor, rowIndex: ri)
-      row.render()
-      @$el.append(row.$el)
-      @rows.push(row)
+    @generateRows()
 
   highlight: ->
     @$el.addClass("highlighted")
 
   clearHighlight: ->
     @$el.removeClass("highlighted")
+
+  generateRows: ->
+    _.each [0..9], (ri)=>
+      row = new SH.Views.Row(rowFor: @playboardFor, rowIndex: ri)
+      row.render()
+      @$el.append(row.$el)
+      @rows.push(row)
