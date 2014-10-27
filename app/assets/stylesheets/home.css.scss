@@ -83,7 +83,10 @@
             background: #ddd;
           }
           &.placing_ship {
-            background: blue;
+            background: #5677fc;
+          }
+          &.placing_ship_border {
+            background: #d0d9ff;
           }
           &.unavailable {
             background: navy;

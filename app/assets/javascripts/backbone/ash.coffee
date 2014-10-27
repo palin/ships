@@ -7,7 +7,7 @@ window.SH =
   State:
     SelectedShip:
       id: null
-      ship: null
+      view: null
     shipSelected: false
     shipsIdsOnMap: []
     allShipsOnMap: false

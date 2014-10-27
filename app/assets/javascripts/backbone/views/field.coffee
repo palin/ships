@@ -45,9 +45,42 @@ class SH.Views.Field extends Marionette.ItemView
     if @belongsTo == "player" && SH.State.shipSelected == true
       @highlightShipShape()
 
-  highlightShipShape: ->
-    console.log 'highlight fields for the ship'
-    # TO DO
+  highlightShipShape: (field)->
+    SH.player_playboard.clean()
+    selectedShipView = SH.State.SelectedShip.view
+    selectedShipModel = SH.State.SelectedShip.view.model
+    length = selectedShipModel.length
+    setup = selectedShipModel.setup
+
+    # Highlight main row
+    buttons = $('.playboard#player').find("button[data-row=#{@dataRow}]")
+    _.each buttons, (b)=>
+      if parseInt($(b).data('column'), 10) >= @dataColumn - 1 && parseInt($(b).data('column'), 10) < @dataColumn + length + 1
+        if parseInt($(b).data('column'), 10) == @dataColumn - 1 || parseInt($(b).data('column'), 10) == @dataColumn + length
+          $(b).addClass('placing_ship_border')
+        else
+          $(b).addClass('placing_ship')
+      else
+        $(b).removeClass('placing_ship')
+
+    # Highlight row above the ship
+    buttons = $('.playboard#player').find("button[data-row=#{@dataRow-1}]")
+    _.each buttons, (b)=>
+      try
+        if parseInt($(b).data('column'), 10) >= @dataColumn - 1 && parseInt($(b).data('column'), 10) < @dataColumn + length + 1
+          $(b).addClass('placing_ship_border')
+        else
+          $(b).removeClass('placing_ship_border')
+
+    # Highlight row under the ship
+    buttons = $('.playboard#player').find("button[data-row=#{@dataRow+1}]")
+    _.each buttons, (b)=>
+      try
+        if parseInt($(b).data('column'), 10) >= @dataColumn - 1 && parseInt($(b).data('column'), 10) < @dataColumn + length + 1
+          $(b).addClass('placing_ship_border')
+        else
+          $(b).removeClass('placing_ship_border')
+
 
   shoot: (field)->
     # console.log "finding a place to shoot at cpu - #{field}"
