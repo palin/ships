@@ -16,7 +16,7 @@ class SH.Views.Row extends Marionette.ItemView
 
   generateFields: ->
     _.each [0..9], (ci)=>
-      field = new SH.Views.Field(className: "#{@rowFor}-field btn btn-default", dataRow: @rowIndex, dataColumn: ci)
+      field = new SH.Views.Field(className: "#{@rowFor}-field btn btn-default", dataRow: @rowIndex, dataColumn: ci, belongsTo: @rowFor)
       field.render()
       @$el.append(field.$el)
       @fields.push field

@@ -23,3 +23,5 @@ class SH.Models.Ship extends Backbone.Model
   coveredColumns: ->
     return [@initialColumn] if @vertical()
     [@initialColumn..@length - 1]
+
+class SH.Collections.Ships extends Backbone.Collection

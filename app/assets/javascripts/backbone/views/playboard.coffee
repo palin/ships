@@ -3,8 +3,6 @@ class SH.Views.Playboard extends Marionette.CollectionView
   className: 'playboard'
   playboardFor: null
   itemView: SH.Views.Row
-  events:
-    'mouseover .cpu-field': 'placeShip'
 
   initialize: ->
     @rows = []

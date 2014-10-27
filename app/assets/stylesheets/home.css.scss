@@ -43,6 +43,10 @@
       }
     }
   }
+  #rotate {
+    display: none;
+    img { width: 30px; }
+  }
   #left, #right {
     width: 700px;
     height: 550px;
