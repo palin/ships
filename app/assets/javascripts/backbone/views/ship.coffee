@@ -27,6 +27,7 @@ class SH.Views.Ship extends Marionette.ItemView
       @toggleRotation()
       @activateShip(ship)
     else if ship.data("state") == "active"
+      SH.player_playboard.clean()
       @deactivateShip(ship)
       SH.player_playboard.clearHighlight()
       SH.State.SelectedShip.view = null
