@@ -14,9 +14,6 @@ class SH.Views.Field extends Marionette.ItemView
     @$el.attr('data-row', @model.get('row'))
     @$el.attr('class', "#{@model.get('for')}-field btn btn-default")
 
-  hit: ->
-    false
-
   fieldClick: (e)->
     e.preventDefault()
     SH.State.clickedField = this
@@ -39,4 +36,4 @@ class SH.Views.Field extends Marionette.ItemView
 
   highlightShipShape: ->
     SH.player_playboard.clean()
-    SH.player_playboard_highlighter.highlight(currentField: this)
+    SH.Services.highlighter.highlight(currentField: this)

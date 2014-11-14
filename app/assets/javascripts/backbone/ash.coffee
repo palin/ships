@@ -23,8 +23,8 @@ window.SH =
     region.show(SH.cpu_playboard)
 
     player_fields = new SH.Collections.Fields(@createFields('player'))
-    player_highlighter = new SH.Services.Highlighter(collection: player_fields)
-    SH.player_playboard_highlighter = player_highlighter
+    SH.Services.shipInstaller = new SH.Services.ShipInstaller(collection: player_fields)
+    SH.Services.highlighter = new SH.Services.Highlighter(collection: player_fields)
     SH.player_playboard = new SH.Views.Playboards.Player(collection: player_fields)
     region = new Marionette.Region(el: $("#container #left"))
     region.show(SH.player_playboard)
