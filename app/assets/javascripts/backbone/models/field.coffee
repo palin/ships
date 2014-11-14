@@ -15,9 +15,11 @@ class SH.Models.Field extends Backbone.Model
   hasColumn: (col)->
     @get('column') == col
 
+  hasAttributeBetween: (att, att_value_start, att_value_end)->
+    @get(att) >= att_value_start && @get(att) <= att_value_end
+
   withinRange: (row_start, row_end, col_start, col_end)->
-    @get('row') >= row_start && @get('row') <= row_end &&
-      @get('column') >= col_start && @get('column') <= col_end
+    @hasAttributeBetween('row', row_start, row_end) && @hasAttributeBetween('column', col_start, col_end)
 
   states: ["empty", "shot", "hit", "missed"]
 
@@ -37,6 +39,4 @@ class SH.Collections.Fields extends Backbone.Collection
     _.filter @models, (model)-> model.hasColumn(col)
 
   findFieldsInRange: (row_start, row_end, col_start, col_end)->
-    _.filter @models, (model)->
-      model.get('row') >= row_start && model.get('row') <= row_end &&
-        model.get('column') >= col_start && model.get('column') <= col_end
+    _.filter @models, (model)-> model.withinRange(row_start, row_end, col_start, col_end)
