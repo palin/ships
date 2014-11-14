@@ -24,4 +24,7 @@ class SH.Models.Ship extends Backbone.Model
     return [@initialColumn] if @vertical()
     [@initialColumn..@length - 1]
 
+  rotate: ->
+    @setup = if @setup == "horizontal" then "vertical" else "horizontal"
+
 class SH.Collections.Ships extends Backbone.Collection

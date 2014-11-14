@@ -59,41 +59,37 @@
       overflow: hidden;
       border: 3px solid #599db2;
 
-      .row {
-        margin-bottom: -4px;
-        margin-left: 0;
-        button {
-          width: 50px;
-          height: 50px;
-          margin: 0;
-          padding: 0;
-          border-color: #7ec6dc;
-          border-radius: 0px;
-          border-style: dotted;
-          float: left;
-          &:hover {
-            background: #ddd;
-          }
-          &.hit {
-            background: #000;
-          }
-          &.empty {
-          }
-          &.selected {
-            background: #ddd;
-          }
-          &.placing_ship {
-            background: #5677fc;
-          }
-          &.placing_ship_border {
-            background: #d0d9ff;
-          }
-          &.unavailable {
-            background: navy;
-          }
-          &.with_ship {
-            background: #000;
-          }
+      button {
+        width: 50px;
+        height: 50px;
+        margin: 0;
+        padding: 0;
+        border-color: #7ec6dc;
+        border-radius: 0px;
+        border-style: dotted;
+        float: left;
+        &:hover {
+          background: #ddd;
+        }
+        &.hit {
+          background: #000;
+        }
+        &.empty {
+        }
+        &.selected {
+          background: #ddd;
+        }
+        &.placing_ship {
+          background: #5677fc;
+        }
+        &.placing_ship_border {
+          background: #d0d9ff;
+        }
+        &.unavailable {
+          background: navy;
+        }
+        &.with_ship {
+          background: #000;
         }
       }
       &.highlighted {

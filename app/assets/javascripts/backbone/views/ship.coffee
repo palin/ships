@@ -24,7 +24,6 @@ class SH.Views.Ship extends Marionette.ItemView
       SH.player_playboard.highlight()
       SH.State.SelectedShip.view = this
       SH.State.shipSelected = true
-      @toggleRotation()
       @activateShip(ship)
     else if ship.data("state") == "active"
       SH.player_playboard.clean()
@@ -32,7 +31,6 @@ class SH.Views.Ship extends Marionette.ItemView
       SH.player_playboard.clearHighlight()
       SH.State.SelectedShip.view = null
       SH.State.shipSelected = false
-      @toggleRotation()
 
   mouseOverShip: ->
     return false if SH.State.shipSelected == true
@@ -52,7 +50,7 @@ class SH.Views.Ship extends Marionette.ItemView
     ship.find("button").removeClass('hover').addClass('selected')
     SH.State.shipSelected = true
     SH.State.SelectedShip.view = this
-    $('.instructions').text("Set ship on your playboard or click the ship to deselect")
+    $('.instructions').text("Set ship on your playboard with LMB, rotate over playboard with RMB, click ship again to deselect")
 
   deactivateShip: (ship)->
     ship.data("state", "inactive")
@@ -61,9 +59,3 @@ class SH.Views.Ship extends Marionette.ItemView
     SH.State.shipSelected = false
     SH.State.currentSelectedShipId = null
     $('.instructions').text("Click a ship to select")
-
-  toggleRotation: (ship)->
-    if SH.State.shipSelected
-      $('#rotate').show()
-    else
-      $('#rotate').hide()

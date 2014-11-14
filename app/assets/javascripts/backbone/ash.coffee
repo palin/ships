@@ -16,11 +16,13 @@ window.SH =
   Ships: null
 
   attachPlayboards: ->
-    SH.cpu_playboard = new SH.Views.Playboards.Cpu
+    cpu_fields = new SH.Collections.Fields(@createFields('cpu'))
+    SH.cpu_playboard = new SH.Views.Playboards.Cpu(collection: cpu_fields)
     region = new Marionette.Region(el: $("#container #right"))
     region.show(SH.cpu_playboard)
 
-    SH.player_playboard = new SH.Views.Playboards.Player
+    player_fields = new SH.Collections.Fields(@createFields('player'))
+    SH.player_playboard = new SH.Views.Playboards.Player(collection: player_fields)
     region = new Marionette.Region(el: $("#container #left"))
     region.show(SH.player_playboard)
 
@@ -37,6 +39,13 @@ window.SH =
       ship = new SH.Models.Ship(id: key, length: value, setup: 'horizontal')
       ships.push(ship)
     SH.Ships = new SH.Collections.Ships(ships)
+
+  createFields: (fieldsFor)->
+    fields = []
+    _.each [0..9], (ri)=>
+      _.each [0..9], (ci)=>
+        fields.push(new SH.Models.Field(row: ri, column: ci, for: fieldsFor))
+    fields
 
 $ ->
   SH.attachPlayboards()
