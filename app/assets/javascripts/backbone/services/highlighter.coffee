@@ -1,7 +1,9 @@
 class SH.Services.Highlighter extends Backbone.Model
 
   shipColorClass: 'placing_ship'
+  shipColorUnavailableClass: 'placing_ship_unavailable'
   borderColorClass: 'placing_ship_border'
+  borderColorUnavailableClass: 'placing_ship_border_unavailable'
 
   initialize: (options)->
     @fieldsCollection = options.collection
@@ -33,7 +35,20 @@ class SH.Services.Highlighter extends Backbone.Model
 
     field.withinRange(shipStartRow, shipEndRow, shipStartCol, shipEndCol)
 
+  requiredFieldsCount: ->
+    (@shipLength + 2) * 3
+
   colorize: ->
     _.each @fieldsWithinMouseRange, (model)=>
-      cssClass = if @belongsToShip(model) then @shipColorClass else @borderColorClass
+      cssClass = if @belongsToShip(model)
+          if SH.Services.shipInstaller.isAvailable(@currentField)
+            @shipColorClass
+          else
+            @shipColorUnavailableClass
+        else
+          if SH.Services.shipInstaller.isAvailable(@currentField)
+            @borderColorClass
+          else
+            @borderColorUnavailableClass
+
       $(model.fieldView.$el).addClass(cssClass)

@@ -82,14 +82,22 @@
         &.placing_ship {
           background: #5677fc;
         }
+        &.placing_ship_unavailable {
+          background: #FF4A40;
+        }
         &.placing_ship_border {
           background: #d0d9ff;
         }
-        &.unavailable {
+        &.placing_ship_border_unavailable {
+          background: #FFCFCA;
+        }
+        // place for a ship
+        &.reserved {
           background: navy;
         }
-        &.with_ship {
-          background: #000;
+        // place around a ship
+        &.unavailable {
+          background: gray;
         }
       }
       &.highlighted {

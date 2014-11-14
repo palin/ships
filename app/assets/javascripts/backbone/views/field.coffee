@@ -2,9 +2,12 @@ class SH.Views.Field extends Marionette.ItemView
   template: JST['backbone/templates/field']
   tagName: 'button'
   events:
-    'click': 'fieldClick'
-    'mouseover': 'defineAction'
+    'click': 'handleMouseClick'
+    'mouseover': 'handleMouseOver'
     'contextmenu': 'rotateShip'
+
+  reservedClass: 'reserved'
+  unavailableClass: 'unavailable'
 
   initialize: ->
     @model.fieldView = this
@@ -14,14 +17,23 @@ class SH.Views.Field extends Marionette.ItemView
     @$el.attr('data-row', @model.get('row'))
     @$el.attr('class', "#{@model.get('for')}-field btn btn-default")
 
-  fieldClick: (e)->
+  handleMouseClick: (e)->
     e.preventDefault()
     SH.State.clickedField = this
+
     if SH.State.shipSelected
-      SH.player_playboard.installShip(e)
+      SH.Services.shipInstaller.install(this)
+    else
+      false
 
   isAvailable: ->
     !(@$el.hasClass("with_ship") || @$el.hasClass("unavailable"))
+
+  makeUnavailable: ->
+    @$el.addClass(@unavailableClass)
+
+  reserve: ->
+    @$el.addClass(@reservedClass)
 
   rotateShip: (e)->
     return false unless SH.State.shipSelected
@@ -29,7 +41,7 @@ class SH.Views.Field extends Marionette.ItemView
     @highlightShipShape(e)
     return false
 
-  defineAction: (e)->
+  handleMouseOver: (e)->
     if @model.for == "player"
       if SH.State.shipSelected == true
         @highlightShipShape()

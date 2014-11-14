@@ -15,13 +15,25 @@ class SH.Models.Field extends Backbone.Model
   hasColumn: (col)->
     @get('column') == col
 
+  hasShip: ->
+    @state == "reserved"
+
+  reserve: ->
+    @state = "reserved"
+
+  makeUnavailable: ->
+    @state = "unavailable"
+
+  unavailable: ->
+    @state == "unavailable"
+
   hasAttributeBetween: (att, att_value_start, att_value_end)->
     @get(att) >= att_value_start && @get(att) <= att_value_end
 
   withinRange: (row_start, row_end, col_start, col_end)->
     @hasAttributeBetween('row', row_start, row_end) && @hasAttributeBetween('column', col_start, col_end)
 
-  states: ["empty", "shot", "hit", "missed"]
+  states: ["empty", "reserved", "unavailable", "shot", "hit", "missed"]
 
 class SH.Collections.Fields extends Backbone.Collection
   findFieldByCoords: (e)->

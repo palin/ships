@@ -3,4 +3,4 @@ class SH.Views.Playboards.Player extends SH.Views.Playboard
   playboardFor: 'player'
 
   clean: ->
-    @$('button').removeClass("placing_ship placing_ship_border")
+    @$('button').removeClass("placing_ship placing_ship_border placing_ship_unavailable placing_ship_border_unavailable")
