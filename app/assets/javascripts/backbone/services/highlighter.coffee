@@ -12,6 +12,7 @@ class SH.Services.Highlighter extends Backbone.Model
     @currentFieldColumn = @currentField.get('column')
     @selectedShipModel = SH.State.SelectedShip.view.model
     @shipLength = @selectedShipModel.length
+    @fieldsWithinMouseRange = @findAllFieldsWithinMouseRange()
     @colorize()
 
   findAllFieldsWithinMouseRange: ->
@@ -33,7 +34,6 @@ class SH.Services.Highlighter extends Backbone.Model
     field.withinRange(shipStartRow, shipEndRow, shipStartCol, shipEndCol)
 
   colorize: ->
-    fieldModels = @findAllFieldsWithinMouseRange()
-    _.each fieldModels, (model)=>
+    _.each @fieldsWithinMouseRange, (model)=>
       cssClass = if @belongsToShip(model) then @shipColorClass else @borderColorClass
       $(model.fieldView.$el).addClass(cssClass)
