@@ -10,10 +10,10 @@ class SH.Models.Ship extends Backbone.Model
     @sunk = false
     @hit = false
 
-  horizontal: ->
+  isHorizontal: ->
     @setup == "horizontal"
 
-  vertical: ->
+  isVertical: ->
     @setup == "vertical"
 
   coveredRows: ->
