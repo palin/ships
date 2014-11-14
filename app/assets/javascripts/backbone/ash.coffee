@@ -3,6 +3,7 @@ window.SH =
   Views:
     Playboards: {}
   Collections: {}
+  Services: {}
 
   State:
     SelectedShip:
@@ -22,6 +23,8 @@ window.SH =
     region.show(SH.cpu_playboard)
 
     player_fields = new SH.Collections.Fields(@createFields('player'))
+    player_highlighter = new SH.Services.Highlighter(collection: player_fields)
+    SH.player_playboard_highlighter = player_highlighter
     SH.player_playboard = new SH.Views.Playboards.Player(collection: player_fields)
     region = new Marionette.Region(el: $("#container #left"))
     region.show(SH.player_playboard)
@@ -51,3 +54,4 @@ $ ->
   SH.attachPlayboards()
   SH.createShips()
   SH.attachShips()
+

@@ -3,6 +3,8 @@ class SH.Views.Field extends Marionette.ItemView
   tagName: 'button'
   events:
     'click': 'fieldClick'
+    'mouseover': 'defineAction'
+    'contextmenu': 'rotateShip'
 
   initialize: ->
     @model.fieldView = this
@@ -19,23 +21,22 @@ class SH.Views.Field extends Marionette.ItemView
     e.preventDefault()
     SH.State.clickedField = this
     if SH.State.shipSelected
-      SH.cpu_playboard.installShip(e)
-    else
-      @shoot(e)
-
-  shoot: (e)->
-    target = $(e.currentTarget)
-    row = target.data("row")
-    column = target.data("column")
-    if @hit()
-      target.addClass("hit")
-    else
-      target.removeClass('btn-default')
-      target.addClass('btn-info')
-      target.addClass("empty")
+      SH.player_playboard.installShip(e)
 
   isAvailable: ->
     !(@$el.hasClass("with_ship") || @$el.hasClass("unavailable"))
 
-  shoot: (field)->
-    true
+  rotateShip: (e)->
+    return false unless SH.State.shipSelected
+    SH.State.SelectedShip.view.model.rotate()
+    @highlightShipShape(e)
+    return false
+
+  defineAction: (e)->
+    if @model.for == "player"
+      if SH.State.shipSelected == true
+        @highlightShipShape()
+
+  highlightShipShape: ->
+    SH.player_playboard.clean()
+    SH.player_playboard_highlighter.highlight(currentField: this)
