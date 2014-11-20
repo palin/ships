@@ -15,6 +15,10 @@ window.SH =
     clickedField: null
 
   Ships: null
+  Instructions: null
+
+  initInstructions: ->
+    SH.Instructions = $('.instructions')
 
   attachPlayboards: ->
     cpu_fields = new SH.Collections.Fields(@createFields('cpu'))
@@ -25,6 +29,7 @@ window.SH =
     player_fields = new SH.Collections.Fields(@createFields('player'))
     SH.Services.shipInstaller = new SH.Services.ShipInstaller(collection: player_fields)
     SH.Services.highlighter = new SH.Services.Highlighter(collection: player_fields)
+    SH.Services.playboardChecker = new SH.Services.PlayboardChecker(collection: player_fields)
     SH.player_playboard = new SH.Views.Playboards.Player(collection: player_fields)
     region = new Marionette.Region(el: $("#container #left"))
     region.show(SH.player_playboard)
@@ -51,6 +56,7 @@ window.SH =
     fields
 
 $ ->
+  SH.initInstructions()
   SH.attachPlayboards()
   SH.createShips()
   SH.attachShips()

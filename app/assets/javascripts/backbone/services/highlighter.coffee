@@ -14,39 +14,20 @@ class SH.Services.Highlighter extends Backbone.Model
     @currentFieldColumn = @currentField.get('column')
     @selectedShipModel = SH.State.SelectedShip.view.model
     @shipLength = @selectedShipModel.length
-    @fieldsWithinMouseRange = @findAllFieldsWithinMouseRange()
     @colorize()
 
-  findAllFieldsWithinMouseRange: ->
-    rowStart = @currentFieldRow - 1
-    rowEnd = @currentFieldRow + (if @selectedShipModel.isHorizontal() then 1 else @shipLength)
-
-    columnStart = @currentFieldColumn - 1
-    columnEnd = @currentFieldColumn + (if @selectedShipModel.isHorizontal() then @shipLength else 1)
-
-    @fieldsCollection.findFieldsInRange(rowStart, rowEnd, columnStart, columnEnd)
-
-  belongsToShip: (field)->
-    shipStartRow = @currentFieldRow
-    shipEndRow = @currentFieldRow + (if @selectedShipModel.isHorizontal() then 0 else @shipLength - 1)
-
-    shipStartCol = @currentFieldColumn
-    shipEndCol = @currentFieldColumn + (if @selectedShipModel.isHorizontal() then @shipLength - 1 else 0)
-
-    field.withinRange(shipStartRow, shipEndRow, shipStartCol, shipEndCol)
-
-  requiredFieldsCount: ->
-    (@shipLength + 2) * 3
-
   colorize: ->
-    _.each @fieldsWithinMouseRange, (model)=>
-      cssClass = if @belongsToShip(model)
-          if SH.Services.shipInstaller.isAvailable(@currentField)
+    available = SH.Services.playboardChecker.placeIsAvailable(@currentField)
+    fieldsWithinMouseRange = SH.Services.playboardChecker.allFieldsWithinMouseRange(@currentField)
+
+    _.each fieldsWithinMouseRange, (model)=>
+      cssClass = if SH.Services.playboardChecker.fieldBelongsToShip(@currentField, model)
+          if available
             @shipColorClass
           else
             @shipColorUnavailableClass
         else
-          if SH.Services.shipInstaller.isAvailable(@currentField)
+          if available
             @borderColorClass
           else
             @borderColorUnavailableClass

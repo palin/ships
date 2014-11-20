@@ -1,7 +1,7 @@
 class SH.Views.Ship extends Marionette.ItemView
   template: JST['backbone/templates/ship']
   events:
-    'click': 'selectShip'
+    'click': 'clickShip'
     'mouseover': 'mouseOverShip'
     'mouseout': 'mouseOutShip'
 
@@ -17,8 +17,11 @@ class SH.Views.Ship extends Marionette.ItemView
       button = "<button class='btn btn-default'></button>"
       @$el.append button
 
-  selectShip: (e)=>
+  clickShip: (e)=>
     e.preventDefault()
+    @toggleShipSelection()
+
+  toggleShipSelection: (destroyShip=false)->
     ship = @$el
     if ship.data("state") == "inactive" && SH.State.shipSelected == false
       SH.player_playboard.highlight()
@@ -31,6 +34,7 @@ class SH.Views.Ship extends Marionette.ItemView
       SH.player_playboard.clearHighlight()
       SH.State.SelectedShip.view = null
       SH.State.shipSelected = false
+      ship.remove() if destroyShip
 
   mouseOverShip: ->
     return false if SH.State.shipSelected == true
@@ -50,7 +54,7 @@ class SH.Views.Ship extends Marionette.ItemView
     ship.find("button").removeClass('hover').addClass('selected')
     SH.State.shipSelected = true
     SH.State.SelectedShip.view = this
-    $('.instructions').text("Set ship on your playboard with LMB, rotate over playboard with RMB, click ship again to deselect")
+    SH.Instructions.text("Set the ship on your playboard with LMB, rotate over playboard with RMB, click the ship again to deselect")
 
   deactivateShip: (ship)->
     ship.data("state", "inactive")
@@ -58,4 +62,4 @@ class SH.Views.Ship extends Marionette.ItemView
     ship.find("button").removeClass('selected')
     SH.State.shipSelected = false
     SH.State.currentSelectedShipId = null
-    $('.instructions').text("Click a ship to select")
+    SH.Instructions.text("Click a ship to select")

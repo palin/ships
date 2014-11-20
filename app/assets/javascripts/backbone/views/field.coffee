@@ -22,7 +22,11 @@ class SH.Views.Field extends Marionette.ItemView
     SH.State.clickedField = this
 
     if SH.State.shipSelected
-      SH.Services.shipInstaller.install(this)
+      if SH.Services.playboardChecker.placeIsAvailable(this.model)
+        SH.Services.shipInstaller.install(this)
+        @updateState()
+      else
+        SH.Instructions.text("Cannot install the ship in the place you've chosen")
     else
       false
 
@@ -49,3 +53,16 @@ class SH.Views.Field extends Marionette.ItemView
   highlightShipShape: ->
     SH.player_playboard.clean()
     SH.Services.highlighter.highlight(currentField: this)
+
+  updateState: ->
+    SH.State.allShipsOnMap = true
+
+    _.each SH.Ships.models, (model)->
+      SH.State.allShipsOnMap = false unless model.installed
+
+    if SH.State.allShipsOnMap
+      @unlockStartButton()
+      SH.Instructions.text('Click START button to start the game')
+
+  unlockStartButton: ->
+    true

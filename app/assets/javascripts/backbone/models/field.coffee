@@ -15,7 +15,7 @@ class SH.Models.Field extends Backbone.Model
   hasColumn: (col)->
     @get('column') == col
 
-  hasShip: ->
+  reserved: ->
     @state == "reserved"
 
   reserve: ->
@@ -26,6 +26,9 @@ class SH.Models.Field extends Backbone.Model
 
   unavailable: ->
     @state == "unavailable"
+
+  empty: ->
+    @state == "empty"
 
   hasAttributeBetween: (att, att_value_start, att_value_end)->
     @get(att) >= att_value_start && @get(att) <= att_value_end
