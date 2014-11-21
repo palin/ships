@@ -6,10 +6,7 @@ class SH.Services.ShipInstaller extends Backbone.Model
   install: (currentField)->
     @currentField = currentField
     @currentFieldModel = currentField.model
-    @currentFieldRow = @currentFieldModel.row
-    @currentFieldColumn = @currentFieldModel.column
     @ship = SH.State.SelectedShip.view.model
-    @shipLength = @ship.length
     @reserveFields()
     @deselectShip()
 
@@ -36,9 +33,7 @@ class SH.Services.ShipInstaller extends Backbone.Model
   makeShipBorderUnavailable: ->
     borderFields = SH.Services.playboardChecker.allFieldsWithinMouseRange(@currentFieldModel)
     _.each borderFields, (model)=>
-      if !SH.Services.playboardChecker.fieldBelongsToShip(@currentFieldModel, model)
-        model.makeUnavailable()
-        model.fieldView.makeUnavailable()
+      model.makeUnavailable() unless SH.Services.playboardChecker.fieldBelongsToShip(@currentFieldModel, model)
 
   deselectShip: ->
     SH.State.SelectedShip.view.toggleShipSelection(true)
