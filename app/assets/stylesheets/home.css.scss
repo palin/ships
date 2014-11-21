@@ -1,12 +1,8 @@
-// Place all the styles related to the Home controller here.
-// They will automatically be included in application.css.
-// You can use Sass (SCSS) here: http://sass-lang.com/
-
 #container {
   margin: 0 auto;
   width: 1400px;
   height: 700px;
-  // .ship_5= button_tag "", class: "ship size-5", 'data-state' => 'inactive'
+
   #ships {
     .size_5 {
       width: 270px;
@@ -44,10 +40,7 @@
       }
     }
   }
-  #rotate {
-    display: none;
-    img { width: 30px; }
-  }
+
   #left, #right {
     width: 700px;
     height: 550px;
@@ -57,17 +50,18 @@
       width: 506px;
       height: 506px;
       overflow: hidden;
-      border: 3px solid #599db2;
+      border: 3px solid #a1a1a1;
 
       button {
         width: 50px;
         height: 50px;
         margin: 0;
         padding: 0;
-        border-color: #7ec6dc;
+        border-color: #36B8E0;
         border-radius: 0px;
         border-style: dotted;
         float: left;
+        background: rgba(0, 148, 255, 0.61);
         &:hover {
           background: #ddd;
         }
@@ -80,16 +74,12 @@
           background: #ddd;
         }
         &.placing_ship {
-          background: #5677fc;
+          background: #00FF0D;
+          cursor: move;
         }
         &.placing_ship_unavailable {
-          background: #FF4A40;
-        }
-        &.placing_ship_border {
-          background: #d0d9ff;
-        }
-        &.placing_ship_border_unavailable {
-          background: #FFCFCA;
+          background: #FF3939;
+          cursor: no-drop;
         }
         // place for a ship
         &.reserved {
@@ -97,13 +87,13 @@
         }
         // place around a ship
         &.unavailable {
-          background: gray;
+          background: rgb(244, 244, 244);
         }
       }
       &.highlighted {
-        -webkit-box-shadow: 0px 0px 7px 0px blue;
-        -moz-box-shadow:    0px 0px 7px 0px blue;
-        box-shadow:         0px 0px 7px 0px blue;
+        -webkit-box-shadow: 0px 0px 35px -1px rgba(0, 148, 255, 1);
+        -moz-box-shadow:    0px 0px 35px -1px rgba(0, 148, 255, 1);
+        box-shadow:         0px 0px 35px -1px rgba(0, 148, 255, 1);
       }
     }
   }
