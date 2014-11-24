@@ -9,3 +9,6 @@ class SH.Views.Playboard extends Marionette.CollectionView
 
   clearHighlight: ->
     @$el.removeClass("highlighted")
+
+  disable: ->
+    @$el.attr('disabled', true)

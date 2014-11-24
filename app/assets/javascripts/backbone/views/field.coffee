@@ -25,6 +25,7 @@ class SH.Views.Field extends Marionette.ItemView
       if SH.Services.playboardChecker.placeIsAvailable(this.model)
         SH.Services.shipInstaller.install(this)
         @updateState()
+        SH.playerPlayboard.disable()
       else
         SH.Instructions.text("Cannot install the ship in the place you've chosen")
     else
@@ -51,7 +52,7 @@ class SH.Views.Field extends Marionette.ItemView
         @highlightShipShape()
 
   highlightShipShape: ->
-    SH.player_playboard.clean()
+    SH.playerPlayboard.clean()
     SH.Services.highlighter.highlight(currentField: this)
 
   updateState: ->

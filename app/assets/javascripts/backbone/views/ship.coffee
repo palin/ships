@@ -24,14 +24,14 @@ class SH.Views.Ship extends Marionette.ItemView
   toggleShipSelection: (destroyShip=false)->
     ship = @$el
     if ship.data("state") == "inactive" && SH.State.shipSelected == false
-      SH.player_playboard.highlight()
+      SH.playerPlayboard.highlight()
       SH.State.SelectedShip.view = this
       SH.State.shipSelected = true
       @activateShip(ship)
     else if ship.data("state") == "active"
-      SH.player_playboard.clean()
+      SH.playerPlayboard.clean()
       @deactivateShip(ship)
-      SH.player_playboard.clearHighlight()
+      SH.playerPlayboard.clearHighlight()
       SH.State.SelectedShip.view = null
       SH.State.shipSelected = false
       ship.remove() if destroyShip

@@ -13,7 +13,7 @@ class SH.Services.ShipInstaller extends Backbone.Model
   reserveFields: ->
     @reserveShipSpace()
     @makeShipBorderUnavailable()
-    SH.player_playboard.clean()
+    SH.playerPlayboard.clean()
 
   reserveShipSpace: ->
     @reserveInitialField()
